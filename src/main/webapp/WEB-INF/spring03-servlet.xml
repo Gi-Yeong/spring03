@@ -3,12 +3,31 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <!-- dao bean -->
+    <bean id="userDao" class="com.user.model.UserDao"/>
+    <bean id="guestDao" class="com.guest.model.GuestDao"/>
+
+
     <!-- Handler Mapping -->
-    <bean id="handlerMapping" class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
+    <bean id="handlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="/login.do">login</prop>
+                <prop key="/result.do">loginresult</prop>
+                <prop key="/bbs/list.do">guestlist</prop>
+            </props>
+        </property>
+    </bean>
 
     <!-- Controller Mapping -->
-    <bean name="/main.do" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
-        <property name="viewName" value="index"/>
+    <bean name="login" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+        <property name="viewName" value="user/login"/>
+    </bean>
+    <bean name="loginresult" class="com.user.controller.LoginController">
+        <property name="dao" ref="userDao"/>
+    </bean>
+    <bean name="guestlist" class="com.guest.controller.ListController">
+        <property name="dao" ref="guestDao"/>
     </bean>
 
     <!-- View Resolver -->
