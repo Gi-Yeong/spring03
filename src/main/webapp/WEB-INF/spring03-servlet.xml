@@ -17,6 +17,10 @@
                 <prop key="/bbs/list.do">guestlist</prop>
                 <prop key="/bbs/add.do">guestAdd</prop>
                 <prop key="/bbs/insert.do">guestInsert</prop>
+                <prop key="/bbs/detail.do">guestDetail</prop>
+                <prop key="/bbs/edit.do">guestEdit</prop>
+                <prop key="/bbs/update.do">guestUpdate</prop>
+                <prop key="/bbs/del.do">guestDelete</prop>
             </props>
         </property>
     </bean>
@@ -37,6 +41,22 @@
     <bean name="guestInsert" class="com.guest.controller.InsertController">
         <property name="commandClass" value="com.guest.model.GuestVo"/>
         <property name="commandName" value="guestVo"/>
+        <property name="dao" ref="guestDao"/>
+    </bean>
+    <bean name="guestDetail" class="com.guest.controller.OneController">
+        <property name="dao" ref="guestDao"/>
+        <property name="page" value="detail"/>
+    </bean>
+    <bean name="guestEdit" class="com.guest.controller.OneController">
+        <property name="dao" ref="guestDao"/>
+        <property name="page" value="editform"/>
+    </bean>
+    <bean name="guestUpdate" class="com.guest.controller.UpdateController">
+        <property name="commandClass" value="com.guest.model.GuestVo"/>
+        <property name="commandName" value="guestVo"/>
+        <property name="dao" ref="guestDao"/>
+    </bean>
+    <bean name="guestDelete" class="com.guest.controller.DeleteController">
         <property name="dao" ref="guestDao"/>
     </bean>
 

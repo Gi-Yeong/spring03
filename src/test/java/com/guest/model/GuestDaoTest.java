@@ -9,6 +9,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class GuestDaoTest {
+
     private static GuestDao dao;
 
     @BeforeClass
@@ -17,27 +18,32 @@ public class GuestDaoTest {
     }
 
     @Test
-    public void insertOne() throws Exception {
-        List<GuestVo> list = dao.selectAll();
-        int beforeCnt = list.size();
-        GuestVo bean = new GuestVo(5555, "bbbb", new Date(), 2000);
+    public void testInsertDelete() throws Exception {
+        GuestVo bean = new GuestVo(9999, "test", new Date(), 2000);
+        insertOne(bean);
+        selectOne(bean);
+        deleteOne(bean);
+        bean.setName("test2");
+        bean.setPay(9090);
+        updateOne(bean);
+        selectOne(bean);
+        selectAll();
+    }
+
+    public void insertOne(GuestVo bean) throws Exception {
         dao.insertOne(bean);
-        list = dao.selectAll();
-        int afterCnt = list.size();
-        assertSame(beforeCnt+1, afterCnt);
-        dao.deleteOne(5555);
-        list = dao.selectAll();
-        afterCnt = list.size();
-        assertSame(beforeCnt, afterCnt);
     }
 
-    @Test
-    public void deleteOne() throws Exception {
-
+    public void selectOne(GuestVo bean) throws Exception {
+        GuestVo dto = dao.selectOne(bean.getSabun());
+        assertNotNull(dto);
+        assertEquals(bean, dto);
     }
 
+    public void deleteOne(GuestVo bean) throws Exception {
+        dao.deleteOne(bean.getSabun());
+    }
 
-    @Test
     public void selectAll() {
         try {
             List list = dao.selectAll();
@@ -49,4 +55,7 @@ public class GuestDaoTest {
         }
     }
 
+    public void updateOne(GuestVo bean) throws Exception {
+        dao.updateOne(bean);
+    }
 }
