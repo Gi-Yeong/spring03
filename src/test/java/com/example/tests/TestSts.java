@@ -1,8 +1,6 @@
 package com.example.tests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -11,13 +9,13 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.fail;
 
 public class TestSts {
-    private WebDriver driver;
-    private String baseUrl;
-    private boolean acceptNextAlert = true;
-    private StringBuffer verificationErrors = new StringBuffer();
+    private static WebDriver driver;
+    private static String baseUrl;
+    private static boolean acceptNextAlert = true;
+    private static StringBuffer verificationErrors = new StringBuffer();
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void setUp() throws Exception {
         System.setProperty("webdriver.gecko.driver", "C:\\geckodriver.exe");
     driver = new FirefoxDriver();
 //        driver = new ChromeDriver();
@@ -63,8 +61,8 @@ public class TestSts {
         driver.findElement(By.linkText("삭제")).click();
     }
 
-    @After
-    public void tearDown() throws Exception {
+    @AfterClass
+    public static void tearDown() throws Exception {
         driver.quit();
         String verificationErrorString = verificationErrors.toString();
         if (!"".equals(verificationErrorString)) {
