@@ -2,6 +2,7 @@ package com.guest.controller;
 
 import com.guest.model.GuestDao;
 import com.guest.model.GuestVo;
+import com.user.model.LoginBean;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 

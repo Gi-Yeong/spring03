@@ -14,7 +14,7 @@
 <body>
 <div>
     <c:if test="${loginGo}">
-        <a href="${pageContext.request.contextPath}/login.do">로그인</a>
+        <a href="../login.do">로그인</a>
     </c:if>
 </div>
 <h1>LIST PAGE</h1>

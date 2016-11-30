@@ -15,6 +15,8 @@
                 <prop key="/login.do">login</prop>
                 <prop key="/result.do">loginresult</prop>
                 <prop key="/bbs/list.do">guestlist</prop>
+                <prop key="/bbs/add.do">guestAdd</prop>
+                <prop key="/bbs/insert.do">guestInsert</prop>
             </props>
         </property>
     </bean>
@@ -27,6 +29,14 @@
         <property name="dao" ref="userDao"/>
     </bean>
     <bean name="guestlist" class="com.guest.controller.ListController">
+        <property name="dao" ref="guestDao"/>
+    </bean>
+    <bean name="guestAdd" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+        <property name="viewName" value="guest/form"/>
+    </bean>
+    <bean name="guestInsert" class="com.guest.controller.InsertController">
+        <property name="commandClass" value="com.guest.model.GuestVo"/>
+        <property name="commandName" value="guestVo"/>
         <property name="dao" ref="guestDao"/>
     </bean>
 

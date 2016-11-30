@@ -18,7 +18,7 @@ public class GuestDao {
         try {
             pstmt = OraDB.getConn().prepareStatement(sql);
             rs = pstmt.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 list.add(new GuestVo(
                         rs.getInt("sabun")
                         , rs.getString("name")
@@ -32,5 +32,31 @@ public class GuestDao {
             if (OraDB.getConn() != null) OraDB.getConn().close();
         }
         return list;
+    }
+
+    public void insertOne(GuestVo bean) throws Exception {
+        String sql = "INSERT INTO GUEST VALUES (?, ?, sysdate, ?)";
+        try {
+            pstmt = OraDB.getConn().prepareStatement(sql);
+            pstmt.setInt(1, bean.getSabun());
+            pstmt.setString(2, bean.getName());
+            pstmt.setInt(3, bean.getPay());
+            pstmt.executeUpdate();
+        } finally {
+            if (pstmt != null) pstmt.close();
+            if (OraDB.getConn() != null) OraDB.getConn().close();
+        }
+    }
+
+    public void deleteOne(int sabun) throws Exception {
+        String sql = "DELETE FROM GUEST WHERE SABUN = ?";
+        try {
+            pstmt = OraDB.getConn().prepareStatement(sql);
+            pstmt.setInt(1, sabun);
+            pstmt.executeUpdate();
+        } finally {
+            if (pstmt != null) pstmt.close();
+            if (OraDB.getConn() != null) OraDB.getConn().close();
+        }
     }
 }

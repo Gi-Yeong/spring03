@@ -1,5 +1,6 @@
 package com.user.controller;
 
+import com.user.model.LoginBean;
 import com.user.model.UserDao;
 import com.user.model.UserVo;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,7 +23,7 @@ public class LoginController implements Controller {
         String id = httpServletRequest.getParameter("id").trim();
         String pw = httpServletRequest.getParameter("pw").trim();
         UserVo bean = dao.login(id, pw);
-        if (bean.getLogin().equals("TRUE")){
+        if (bean.getLogin().equals("TRUE")) {
             HttpSession session = httpServletRequest.getSession();
             session.setAttribute("result", true);
             session.setAttribute("id", id);
